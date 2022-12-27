@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body style="<%- locals.user ? `background-color: ${locals.user.color};` : null %>">
+
+  <h1>
+    <%= title %>
+  </h1>
+  <% if (locals.user) { %>
+    <p>Hola <%= user.name %>, elegiste el color: <%= user.color %> , tu email es:
+          <%= user.email %> y tu edad es: <%= user.age %>
+    </p>
+    <% } %>
+      <form action="/stored" method="post">
+        <label for="name">Ingrese su nombre:</label>
+        <input type="text" id="name" name="name" value="<%= locals.old && old.name ? old.name : null%>">
+        <% if (locals.errors && errors.name) { %>
+          <p class="register_errors" style="color:red">
+            <%= errors.name.msg %>
+          </p>
+          <% } %>
+            <select name="color" id="color">
+              <option value="" disabled selected>Elija un color:</option>
+              <option value="red" id="color" name="red" <%=locals.old && old.color==="red" ? "selected" : null%>>Rojo
+              </option>
+              <option value="blue" id="color" name="blue" <%=locals.old && old.color==="blue" ? "selected" : null%>>Azul
+              </option>
+              <option value="yellow" id="color" name="yellow" <%=locals.old && old.color==="yellow" ? "selected" :
+                null%>>Amarillo</option>
+              <option value="green" id="color" name="green" <%=locals.old && old.color==="green" ? "selected" : null%>
+                >Verde</option>
+              <option value="orange" id="color" name="orange" <%=locals.old && old.color==="orange" ? "selected" :
+                null%>>Naranja</option>
+            </select>
+            <% if (locals.errors && errors.color) { %>
+              <p class="register_errors" style="color:red">
+                <%= errors.color.msg %>
+              </p>
+              <% } %>
+                <label for="email">Ingrese un email:</label>
+                <input type="email" id="email" name="email" value="<%= locals.old && old.email ? old.email : null%>">
+                <% if (locals.errors && errors.email) { %>
+                  <p class="register_errors" style="color:red">
+                    <%= errors.email.msg %>
+                  </p>
+                  <% } %>
+                    <label for="age">Ingrese su edad:</label>
+                    <input type="text" id="age" name="age" value="<%= locals.old && old.age ? old.age : null%>">
+                    <% if (locals.errors && errors.age) { %>
+                      <p class="register_errors" style="color:red">
+                        <%= errors.age.msg %>
+                      </p>
+                      <% } %>
+                        <div style="display: flex; flex-direction: row-reverse;"><input type="checkbox" id="remember" value="si" name="remember" /><label class="light"
+                          for="remember">Recordar color</label></div>
+                        <button type="submit">Enviar</button>
+      </form>
+</body>
+
+</html>
