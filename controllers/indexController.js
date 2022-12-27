@@ -37,6 +37,11 @@ module.exports = {
 				old: req.body
 			})
 		}
-    }
+    },    
+logout: (req, res) => {
+      res.clearCookie("color");
+      req.session.destroy();
+      return res.redirect("/");
+    },
 }
 

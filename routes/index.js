@@ -1,5 +1,5 @@
 var express = require('express');
-const { index, stored, message } = require('../controllers/indexController');
+const { index, stored, message, logout } = require('../controllers/indexController');
 const indexValidator = require('../validations/indexValidator');
 var router = express.Router();
 
@@ -8,5 +8,6 @@ router
   .get('/', index)
   .get('/message', message)
   .post('/stored',indexValidator, stored)
+  .get("/logout", logout);
 
 module.exports = router;
